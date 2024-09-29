@@ -37,17 +37,32 @@ for ($i = 0; $i < count($countries); $i++) {
 echo "\n";
 
 foreach ($countries as $i => $country) {
-    $number = $i+1;
-    echo "$number ";
-    foreach ($country as $key => $value) 
-    {
-      if (!is_array($value))
-        echo "$key: $value; ";
-      else {
+    // $number = $i+1;
+    echo "$i ";
+    //print_r($country);
+    //echo $country["name"] . " " . $country["capital"] . " " . $country["area"];
+
+    foreach ($country as $key => $value) {
         echo "$key: ";
-        foreach ( $value as $k => $v )
-          echo "[$k - $v]";
+        if (!is_array($value)) {
+            echo $value . " ";
         }
-     }
-     echo ";\n";
-  }
+        else {
+            // echo $value["2000"] . " ". $value["2010"];
+            foreach ($value as $k => $v) {
+                echo "[$k - $v]";
+            }
+        }
+    }
+    // foreach ($country as $key => $value)
+    // {
+    // //   if (!is_array($value))
+    // //     echo "$key: $value; ";
+    // //   else {
+    // //     echo "$key: ";
+    // //     foreach ( $value as $k => $v )
+    // //       echo "[$k - $v]";
+    // //     }
+    //  }
+    echo ";\n";
+}
