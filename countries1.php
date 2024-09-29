@@ -46,23 +46,64 @@ foreach ($countries as $i => $country) {
         echo "$key: ";
         if (!is_array($value)) {
             echo $value . " ";
-        }
-        else {
+        } else {
             // echo $value["2000"] . " ". $value["2010"];
             foreach ($value as $k => $v) {
                 echo "[$k - $v]";
             }
         }
     }
-    // foreach ($country as $key => $value)
-    // {
-    // //   if (!is_array($value))
-    // //     echo "$key: $value; ";
-    // //   else {
-    // //     echo "$key: ";
-    // //     foreach ( $value as $k => $v )
-    // //       echo "[$k - $v]";
-    // //     }
-    //  }
     echo ";\n";
 }
+
+function name($a, $b)
+{
+    if ($a["name"] < $b["name"]) {
+        return -1;
+    } elseif ($a["name"] == $b["name"]) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+function average($a, $b)
+{ // функция, определяющая способ сортировки (по сумме населения за 2000 и за 2010 годы)
+    if ($a["population"]["2000"] + $a["population"]["2010"] < $b["population"]["2000"] + $b["population"]["2010"]) {
+        return -1;
+    } elseif ($a["population"]["2000"] + $a["population"]["2010"] == $b["population"]["2000"] + $b["population"]["2010"]) {
+        return 0;
+    } else {
+        return 1;
+    }
+
+}
+
+function print_country($country, $key_country, $data)
+{
+    // static $i=1; // статическая глобальная переменная-счетчик
+    echo $data . " ";
+    foreach ($country as $key => $value) {
+        if (!is_array($value)) {
+            echo "$key:$value\t";
+        } else {
+            echo "$key: ";
+            foreach ($value as $k => $v) {
+                echo "[{$k} год. - $v] ";
+            }
+
+        }
+    }
+    echo "Average population: " . array_sum($country['population']) / count($country['population']);
+    echo "\n";
+
+    // $i++;
+}
+
+echo "№  Назва\tСтолиця\t\tПлоща\t\tНаселення\n";
+array_walk($countries, "print_country", "№");
+
+uasort($countries, "name");
+
+echo "№  Назва\tСтолиця\t\tПлоща\t\tНаселення\n";
+array_walk($countries, "print_country", "№");
