@@ -100,6 +100,31 @@ function print_country($country, $key_country, $data)
     // $i++;
 }
 
+function search($countries, $data)
+{
+    // print_r($countries);
+    // echo $data;
+    $result = [];
+    foreach ($countries as $country_number => $country) {
+        foreach ($country as $key => $value) {
+            if (!is_array($value)) {
+                if (stripos($value, $data)) {
+                    $result[] = $country_number;
+                }
+            } else {
+                foreach ($value as $k => $v) {
+                    if (stripos($v, $data)) {
+                        $result[] = $country_number;
+                    }
+                }
+
+            }
+        }
+
+    }
+    return array_unique($result);
+}
+
 echo "№  Назва\tСтолиця\t\tПлоща\t\tНаселення\n";
 array_walk($countries, "print_country", "№");
 
@@ -107,3 +132,6 @@ uasort($countries, "name");
 
 echo "№  Назва\tСтолиця\t\tПлоща\t\tНаселення\n";
 array_walk($countries, "print_country", "№");
+
+$res = search($countries, 80);
+print_r($res);
