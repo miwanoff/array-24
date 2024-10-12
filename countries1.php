@@ -133,5 +133,5 @@ uasort($countries, "name");
 echo "№  Назва\tСтолиця\t\tПлоща\t\tНаселення\n";
 array_walk($countries, "print_country", "№");
 
-$res = search($countries, 80);
-print_r($res);
+//$res = search($countries, 80);
+print_r(search($countries, 80));
