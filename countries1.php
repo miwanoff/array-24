@@ -122,7 +122,10 @@ function search($countries, $data)
         }
 
     }
-    return array_unique($result);
+    // $flip_result = array_flip(array_unique($result));
+    // $countries_search_result = array_intersect_key($countries, $flip_result);
+    // return $countries_search_result;
+    return array_intersect_key($countries, array_flip(array_unique($result)));
 }
 
 echo "№  Назва\tСтолиця\t\tПлоща\t\tНаселення\n";
@@ -134,4 +137,10 @@ echo "№  Назва\tСтолиця\t\tПлоща\t\tНаселення\n";
 array_walk($countries, "print_country", "№");
 
 //$res = search($countries, 80);
-print_r(search($countries, 80));
+//print_r(search($countries, "land"));
+
+$subject = "80";
+echo "Результат пошуку \"$subject\"\n";
+$res = search($countries, $subject);
+
+array_walk($res, "print_country", "№");
